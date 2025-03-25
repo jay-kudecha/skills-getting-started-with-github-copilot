@@ -83,6 +83,23 @@ section h3 {
   margin-bottom: 5px;
 }
 
+.participant-card {
+  margin-bottom: 15px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #e3f2fd;
+}
+
+.participant-card h4 {
+  margin-bottom: 10px;
+  color: #1e88e5;
+}
+
+.participant-card p {
+  margin-bottom: 8px;
+}
+
 .form-group {
   margin-bottom: 15px;
 }

@@ -42,9 +42,12 @@
     </main>
 
     <footer>
-      <p>&copy; 2023 Mergington High School</p>
+      <p>&copy; <span id="current-year"></span> Mergington High School</p>
     </footer>
 
     <script src="app.js"></script>
+    <script>
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
   </body>
 </html>

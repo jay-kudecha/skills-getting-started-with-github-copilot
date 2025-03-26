@@ -4,6 +4,34 @@ document.addEventListener("DOMContentLoaded", () => {
   const signupForm = document.getElementById("signup-form");
   const messageDiv = document.getElementById("message");
 
+  // Function to create an accordion for participants
+  function createAccordion(name, participants) {
+    const accordionButton = document.createElement("button");
+    accordionButton.className = "accordion";
+    accordionButton.textContent = `Participants (${participants.length})`;
+
+    const panel = document.createElement("div");
+    panel.className = "panel";
+
+    const participantsList = document.createElement("ul");
+    participantsList.id = `participants-${name}`; // Add id for consistency with updateParticipantsList
+    participants.forEach((participant) => {
+      const listItem = document.createElement("li");
+      listItem.textContent = participant;
+      participantsList.appendChild(listItem);
+    });
+
+    panel.appendChild(participantsList);
+
+    // Toggle accordion functionality
+    accordionButton.addEventListener("click", () => {
+      const isActive = accordionButton.classList.toggle("active");
+      panel.style.display = isActive ? "block" : "none";
+    });
+
+    return { accordionButton, panel };
+  }
+
   // Function to fetch activities from API
   async function fetchActivities() {
     try {
@@ -32,11 +60,11 @@ document.addEventListener("DOMContentLoaded", () => {
           <p>${details.description}</p>
           <p><strong>Schedule:</strong> ${details.schedule}</p>
           <p><strong>Availability:</strong> <span id="spots-left-${name}">${spotsLeft}</span> spots left</p>
-          <p><strong>Participants:</strong></p>
-          <ul id="participants-${name}">
-            ${details.participants.map(participant => `<li>${participant}</li>`).join('')}
-          </ul>
         `;
+
+        const { accordionButton, panel } = createAccordion(name, details.participants);
+        activityCard.appendChild(accordionButton);
+        activityCard.appendChild(panel);
 
         activitiesList.appendChild(activityCard);
 
@@ -73,6 +101,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
     spotsLeftElement.textContent = spotsLeft;
+
+    // Update participant count in the accordion button
+    const accordionButton = participantsList.parentElement.previousElementSibling; // Get the accordion button
+    const currentCount = participantsList.children.length;
+    accordionButton.textContent = `Participants (${currentCount})`;
   }
 
   // Handle form submission

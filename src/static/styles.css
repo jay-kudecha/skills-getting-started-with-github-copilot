@@ -168,3 +168,38 @@ footer {
   padding: 20px;
   color: #666;
 }
+
+.accordion {
+  cursor: pointer;
+  background-color: #f1f1f1;
+  border: none;
+  outline: none;
+  text-align: left;
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  transition: background-color 0.2s;
+}
+
+.accordion:hover {
+  background-color: #ddd;
+}
+
+.accordion.active {
+  background-color: #ccc;
+}
+
+.panel {
+  display: none;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.panel ul {
+  padding-left: 20px;
+}
